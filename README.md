@@ -34,7 +34,7 @@ curl -X POST "https://api.travis-ci.com/auth/github" -d "github_token=TOKEN_GENE
 
 Take the value returned `{"github_token":"YOUR_GITHUB_TOKEN"}` and this is the app's new TravisCI access token. Set this variable in the `config.rolling_travis_builds.webhook_secret` in the applications initializer.
 
-#### Deploy To Herok
+#### Deploy To Heroku
 
 Create a [named Heroku app](https://devcenter.heroku.com/articles/creating-apps) and deploy this app. Your secure Heroku URL will be used when creating webhooks for your repositories.
 
