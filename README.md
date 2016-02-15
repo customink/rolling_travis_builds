@@ -3,7 +3,7 @@
 
 ## Rolling Travis Builds
 
-Reduce the concurrent job load on your TravisCI pro plan using rolling builds by canceling older builds on the same branch(es). This is a template application that your organization can clone, configure, and deploy to Heroku. It focuses on:
+Reduce the concurrent job load on your TravisCI pro plan using rolling builds by canceling older builds on the same branch. This is a template application that your organization can fork, configure, and deploy to Heroku. It focuses on:
 
 * Receiving secure/verified webhooks from GitHub.
 * API calls to TravisCI Pro to cancel duplicate builds.
@@ -15,10 +15,11 @@ To complete the setup you will need:
 * A Webhook Secret
 * Organization Name
 * TravisCI Access Token
+* TravisCI URL
 
 #### Configure Webhook Secret
 
-The webhook secret will be used [verify GitHub payloads](https://developer.github.com/webhooks/securing/) as they come in. This ensures that only your organizations payloads can cancel builds. Heroku will generate this for you during setup but if you need to run this off of heroku, we suggest using `openssl rand -base64 32` to generate your secret key.
+The webhook secret will be used to [verify GitHub payloads](https://developer.github.com/webhooks/securing/) as they come in. This ensures that only your organizations payloads can cancel builds. Heroku will generate this for you during setup but if you need to run this off of heroku, we suggest using `openssl rand -base64 32` to generate your secret key.
 
 #### Configure Organization Name
 

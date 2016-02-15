@@ -1,6 +1,6 @@
 class TravisApi
 
-  CONNECTION = Faraday.new(url: 'https://api.travis-ci.com') do |faraday|
+  CONNECTION = Faraday.new(url: Rails.application.config.rolling_travis_builds.url) do |faraday|
     faraday.request  :url_encoded
     faraday.request  :user_agent, app: 'RollingTravisBuilds', version: '1.0.0'
     faraday.request  :request_id
