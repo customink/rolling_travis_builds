@@ -11,6 +11,10 @@
     },
     "TRAVIS_ACCESS_TOKEN": {
       "description": "Access token for TravisCi. See 'Configure TravisCI Access Token' in the readme for details."
+    },
+    "TRAVIS_URL": {
+      "description": "Default is TravisCI Pro API endpoint. Set this to 'https://api.travis-ci.org' for non-Pro accounts.",
+      "value": "https://api.travis-ci.com"
     }
   }
 }

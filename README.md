@@ -15,6 +15,7 @@ To complete the setup you will need:
 * A Webhook Secret
 * Organization Name
 * TravisCI Access Token
+* TravisCI URL
 
 #### Configure Webhook Secret
 
