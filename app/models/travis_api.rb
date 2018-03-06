@@ -6,7 +6,7 @@ class TravisApi
     faraday.request  :request_id
     faraday.request  :request_headers,
                        authorization: %|token "#{Rails.application.config.rolling_travis_builds.access_token}"|,
-                       accept: 'application/vnd.travis-ci.2+json'
+                       'Travis-API-Version': '3'
     faraday.use      :extended_logging, logger: Rails.logger
     faraday.response :json, content_type: /\bjson$/
     faraday.adapter  :patron
