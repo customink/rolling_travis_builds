@@ -64,6 +64,8 @@ class TravisApi
   def cancel_duplicate_builds!
     ids = duplicate_builds.map { |b| b.fetch 'id' }
     ids.each { |id| api_build_cancel!(id) }
+    job_ids = duplicate_builds.map { |b| b.fetch 'job_ids' }.flatten
+    job_ids.each { |job_id| api_job_cancel!(job_id) }
   end
 
 
@@ -79,6 +81,10 @@ class TravisApi
 
   def api_build_cancel!(id)
     connection.post "builds/#{id}/cancel"
+  end
+
+  def api_job_cancel!(job_id)
+    connection.post "jobs/#{job_id}/cancel"
   end
 
   def api_organization
