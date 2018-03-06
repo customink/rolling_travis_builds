@@ -5,8 +5,8 @@ class TravisApi
     faraday.request  :user_agent, app: 'RollingTravisBuilds', version: '1.0.0'
     faraday.request  :request_id
     faraday.request  :request_headers,
-                       authorization: %|token "#{Rails.application.config.rolling_travis_builds.access_token}"|,
-                       accept: 'application/vnd.travis-ci.2+json'
+                       authorization: %|token "#{ENV['TRAVIS_ROLLING_ACCESS_TOKEN']}"|,
+                       travis_api_version: 3
     faraday.use      :extended_logging, logger: Rails.logger
     faraday.response :json, content_type: /\bjson$/
     faraday.adapter  :patron
@@ -39,9 +39,6 @@ class TravisApi
   def active_builds
     @active_builds ||= begin
       builds = api_builds.fetch('builds').select { |b| b.fetch('state').in?(ACTIVE_STATES) }
-      builds.each do |build|
-        build['branch'] = api_builds.fetch('commits').detect { |c| c['id'] == build['commit_id'] }.fetch('branch')
-      end
     end
   end
 
@@ -74,15 +71,11 @@ class TravisApi
   end
 
   def api_builds
-    @api_builds ||= connection.get("repos/#{api_organization}/#{repo}/builds").body
+    @api_builds ||= connection.get("repo/customink%2F#{repo}/builds").body
   end
 
   def api_build_cancel!(id)
-    connection.post "builds/#{id}/cancel"
-  end
-
-  def api_organization
-    Rails.application.config.rolling_travis_builds.organization_name
+    connection.post "build/#{id}/cancel"
   end
 
 end
